@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Unit Converter</h1>
+    <div class="converter">
+        <label for="input">Enter a value:</label>
+        <input type="number" id="input" placeholder="Value">
+        <select id="fromUnit">
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="in">in</option>
+            <option value="ft">ft</option>
+        </select>
+        <select id="toUnit">
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="in">in</option>
+            <option value="ft">ft</option>
+        </select>
+        <button onclick="convert()">Convert</button>
+        <p id="result"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+`
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+.converter {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.converter label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.converter input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.converter select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.converter button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.converter button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 10px;
+    font-weight: bold;
+
+const conversionFactors = {
+    cm: { cm: 1, m: 0.01, in: 0.393701, ft: 0.0328084 },
+    m: { cm: 100, m: 1, in: 39.3701, ft: 3.28084 },
+    in: { cm: 2.54, m: 0.0254, in: 1, ft: 0.0833333 },
+    ft: { cm: 30.48, m: 0.3048, in: 12, ft: 1 }
+};
+
+function convert() {
+    const input = parseFloat(document.getElementById("input").value);
+    const fromUnit = document.getElementById("fromUnit").value;
+    const toUnit = document.getElementById("toUnit").value;
+
+    if (isNaN(input)) {
+        document.getElementById("result").textContent = "Please enter a valid number.";
+        return;
+    }
+
+    const result = input * conversionFactors[fromUnit][toUnit];
+    document.getElementById("result").textContent = `${input} ${fromUnit} is equal to ${result} ${toUnit}`;
+}
+
+
